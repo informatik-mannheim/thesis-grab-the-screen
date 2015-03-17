@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -21,6 +22,7 @@ import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 import com.estimote.sdk.Utils;
 import com.estimote.sdk.Utils.Proximity;
+import com.estimote.sdk.utils.EstimoteBeacons;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -42,8 +44,8 @@ public class MainActivity extends Activity implements BeaconManager.RangingListe
     public String car_name, car_type, car_price, car_img;
 
     // Beacon
-    //private BeaconManager _manager;
-    //private Region _allEstimoteBeacons;
+    private BeaconManager _manager;
+    private Region _allEstimoteBeacons;
 
     // Json
     public JSONObject jsonObject, row;
@@ -62,9 +64,9 @@ public class MainActivity extends Activity implements BeaconManager.RangingListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //_allEstimoteBeacons = new Region("regionId", EstimoteBeacons.ESTIMOTE_PROXIMITY_UUID, null, null);
-        //_manager = new BeaconManager(this);
-        //_manager.setRangingListener(this);
+        _allEstimoteBeacons = new Region("regionId", EstimoteBeacons.ESTIMOTE_PROXIMITY_UUID, null, null);
+        _manager = new BeaconManager(this);
+        _manager.setRangingListener(this);
 
         // get reference to the views
         etResponse = (EditText) findViewById(R.id.etResponse);
@@ -89,18 +91,18 @@ public class MainActivity extends Activity implements BeaconManager.RangingListe
     @Override
     protected void onStart() {
         super.onStart();
-        //_manager.connect(this);
+        _manager.connect(this);
     }
 
     @Override
     protected void onStop() {
-        //try {
-        //super.onStop();
-        // _manager.stopRanging(_allEstimoteBeacons);
-        //_manager.disconnect();
-        //} catch (RemoteException e) {
-        //e.printStackTrace();
-        //}
+        try {
+        super.onStop();
+        _manager.stopRanging(_allEstimoteBeacons);
+        _manager.disconnect();
+        } catch (RemoteException e) {
+        e.printStackTrace();
+        }
     }
 
     @Override
@@ -149,18 +151,18 @@ public class MainActivity extends Activity implements BeaconManager.RangingListe
      */
     @Override
     public void onServiceReady() {
-        //try {
-        //_manager.startRanging(_allEstimoteBeacons);
-        //} catch (RemoteException e) {
-        //e.printStackTrace();
-        //}
+        try {
+        _manager.startRanging(_allEstimoteBeacons);
+        } catch (RemoteException e) {
+        e.printStackTrace();
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         // When no longer needed.
-        //_manager.disconnect();
+        _manager.disconnect();
     }
 
     public static String GET(String url) {
