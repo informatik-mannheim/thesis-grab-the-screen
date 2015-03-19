@@ -2,7 +2,7 @@
 
 ## German Abstract
 
-### Abstract
+Abstract
 
 ## English Abstract 
 
