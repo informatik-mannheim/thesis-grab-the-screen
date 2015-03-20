@@ -8,7 +8,6 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -24,7 +23,6 @@ import com.estimote.sdk.Utils;
 import com.estimote.sdk.utils.EstimoteBeacons;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
@@ -40,30 +38,24 @@ import java.util.List;
 
 public class MainActivity extends Activity implements BeaconManager.RangingListener, BeaconManager.ServiceReadyCallback {
 
-    private final double PROXIMITY_TABLE = 0.15D;
+    private final static String DEBUG_LABEL = "GTS";
+    private final double PROXIMITY_TABLE = 0.12D;
     private final String PICTURE_URL = "http://141.19.142.50:28017/gts/pictures/";
 
     public String car_type;
     public String car_price;
 
-
     // Beacon
     private BeaconManager beaconManager;
     private Region estimoteBeacon_MINT;
 
-    // Json
-    //public JSONObject jsonObject, row;
-    public JSONArray jsonArray;
-
-    // GUI Elemente
-    public EditText etResponse;
-    public ImageView imageView;
-    public TextView tvIsConnected, tvCarName, tvCarType, tvCarPrice;
-
+    // GUI Elements
+    private EditText etResponse;
+    private ImageView imageView;
+    private TextView tvIsConnected, tvCarName, tvCarType, tvCarPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -79,10 +71,6 @@ public class MainActivity extends Activity implements BeaconManager.RangingListe
         tvCarName = (TextView) findViewById(R.id.tvCarName);
         tvCarType = (TextView) findViewById(R.id.tvCarType);
         tvCarPrice = (TextView) findViewById(R.id.tvCarPrice);
-
-        // call AsynTask to perform network operation on separate thread
-        //new HttpAsyncTask().execute("http://141.19.142.50:28017/gts/pictures/");
-
     }
 
     @Override
@@ -132,7 +120,7 @@ public class MainActivity extends Activity implements BeaconManager.RangingListe
      */
     @Override
     public void onBeaconsDiscovered(Region region, List<Beacon> beacons) {
-        Log.d("TEST", beacons.toString());
+        Log.d(DEBUG_LABEL, beacons.toString());
 
         // check if you are connected or not to Server
         if (isConnected()) {
@@ -185,7 +173,7 @@ public class MainActivity extends Activity implements BeaconManager.RangingListe
                 result = "Did not work!";
 
         } catch (Exception e) {
-            Log.d("InputStream", e.getLocalizedMessage());
+            Log.d(DEBUG_LABEL, e.getLocalizedMessage());
         } finally {
             if (inputStream != null) {
                 try {
@@ -228,7 +216,7 @@ public class MainActivity extends Activity implements BeaconManager.RangingListe
         protected void onPostExecute(String result) {
             try {
                 JSONObject json = new JSONObject(result);
-                jsonArray = json.getJSONArray("rows");
+                JSONArray jsonArray = json.getJSONArray("rows");
                 JSONObject row = jsonArray.getJSONObject(jsonArray.length() - 1);
 
                 tvCarName.setText(row.getString("name"));
