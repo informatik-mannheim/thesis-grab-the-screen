@@ -30,7 +30,7 @@ namespace GrabTheScreen
     public partial class SurfaceWindow1 : SurfaceWindow
     {
 
-        Auto audi, bmw;
+        public Auto audi, bmw;
         String baseString;
 
         /// <summary>
@@ -108,15 +108,20 @@ namespace GrabTheScreen
         {
             //TODO: disable audio, animations here
         }
+ 
 
         // Erzeugung der Auto-Informationen und Autobild im rechten Block
         private void SurfaceWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            // Random Preis generieren 
+            Random random = new Random();
+            int randomPrice = random.Next(12000, 33000);
+
             // Auto Objekt #1 erzeugen
             audi = new Auto();
             audi.setModel("Audi A3 Sportback");
             audi.setModelDescription("Ambition 2.0 TDI Clean Diesel");
-            audi.setPrice("30.500,00 EUR");
+            audi.setPrice(randomPrice + " EUR");
             audi.setSource("Resources/small_audi.jpg");
 
             // Auto Objekt #2 erzeugen
@@ -198,7 +203,8 @@ namespace GrabTheScreen
             //Console.WriteLine("Auto-Objekt:" + jsonString);
 
             // Methodenaufruf, damit JSON-String auf den Server gepusht wird
-            postJSONtoServer();
+           //  postJSONtoServer();
+            MongoDB.mongoDBconnection();
         }
 
         // erzeugt Tag-Bereich

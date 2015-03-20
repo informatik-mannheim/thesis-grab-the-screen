@@ -18,13 +18,15 @@ namespace GrabTheScreen
         public String modelDescription;
         public String price;
         public String source;
+        public String id;
 
-        public Auto(String car_model, String car_modelDescription, String car_price, String car_source)
+        public Auto(String car_model, String car_modelDescription, String car_price, String car_source, String car_id)
         {
             model = car_model;
             modelDescription = car_modelDescription;
             price = car_price;
             source = car_source;
+            id = car_id;
         }
 
         public Auto()
@@ -32,6 +34,7 @@ namespace GrabTheScreen
 
         }
 
+        // ----- Getter & Setter 
 
         public void setModel(String model)
         {
@@ -71,6 +74,17 @@ namespace GrabTheScreen
         public String getSource()
         {
             return this.source;
+        }
+
+
+        public void setId(String id)
+        {
+            this.id = id;
+        }
+
+        public String getId()
+        {
+            return this.id;
         }
     }
 
