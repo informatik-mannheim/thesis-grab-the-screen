@@ -116,6 +116,19 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\small_bmw_blau.jpg" />
+    <Resource Include="Resources\small_bmw_rot.jpg" />
+    <Resource Include="Resources\small_bmw_schwarz.jpg" />
+    <Resource Include="Resources\small_bmw_weiß.jpg" />
+    <Resource Include="Resources\bmw_blau.jpg" />
+    <Resource Include="Resources\bmw_rot.jpg" />
+    <Resource Include="Resources\bmw_schwarz.jpg" />
+    <Resource Include="Resources\bmw_weiß.jpg" />
+    <Resource Include="Resources\btn_black.jpg" />
+    <Resource Include="Resources\btn_blue.jpg" />
+    <Resource Include="Resources\btn_red.jpg" />
+    <Resource Include="Resources\btn_white.jpg" />
+    <Resource Include="Resources\audi_a5_white.jpg" />
     <Resource Include="Resources\small_audi.jpg" />
     <Resource Include="Resources\audi_blau.png" />
     <Resource Include="Resources\audi_logo2.png" />
