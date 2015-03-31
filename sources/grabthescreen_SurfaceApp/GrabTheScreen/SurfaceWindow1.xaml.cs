@@ -21,6 +21,7 @@ using Microsoft.Surface;
 using Microsoft.Surface.Presentation;
 using Microsoft.Surface.Presentation.Controls;
 using Microsoft.Surface.Presentation.Input;
+using System.Security.Cryptography;
 
 namespace GrabTheScreen
 {
@@ -30,8 +31,9 @@ namespace GrabTheScreen
     public partial class SurfaceWindow1 : SurfaceWindow
     {
 
-        public Auto audi, bmw;
-        String baseString;
+        public Auto auto;
+        public String baseString;
+        
 
         /// <summary>
         /// Default constructor.
@@ -108,31 +110,25 @@ namespace GrabTheScreen
         {
             //TODO: disable audio, animations here
         }
- 
+
 
         // Erzeugung der Auto-Informationen und Autobild im rechten Block
         private void SurfaceWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            // Random Preis generieren 
+            // Auto Objekt erzeugen: Initial rot
+            this.auto = new Auto();
             Random random = new Random();
-            int randomPrice = random.Next(12000, 33000);
-
-            // Auto Objekt #1 erzeugen
-            audi = new Auto();
-            audi.setModel("Audi A3 Sportback");
-            audi.setModelDescription("Ambition 2.0 TDI Clean Diesel");
-            audi.setPrice(randomPrice + " EUR");
-            audi.setSource("Resources/small_audi.jpg");
-
-            // Auto Objekt #2 erzeugen
-            bmw = new Auto();
-            bmw.setModel("BMW");
-            bmw.setModelDescription("");
-            bmw.setPrice("");
-            bmw.setSource("");
+            int hash = random.Next(10000, 999999999);
+            this.auto.setId(hash.ToString());
+            this.auto.setModel("BMW 116i 3-T¸rer");
+            this.auto.setModelDescription("Modell Advantage");
+            this.auto.setPrice("22.650 EUR");
+            this.auto.setSource("Resources/small_bmw_rot.jpg");
+            this.auto.setColor("Rot");
+            this.auto.setStatus(false);
 
             // Miniaturbild (thumbnail) erzeugen
-            Uri uri = new Uri(audi.getSource(), UriKind.Relative);
+            Uri uri = new Uri(auto.getSource(), UriKind.Relative);
             BitmapImage imageBitmap = new BitmapImage(uri);
             System.Windows.Controls.Image thumbnail = new System.Windows.Controls.Image();
             thumbnail.Source = imageBitmap;
@@ -143,9 +139,7 @@ namespace GrabTheScreen
         public void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             var grid = sender as Grid;
-            Label_carModel.Content = audi.getModel();
-            Label_carDescription.Content = audi.getModelDescription();
-            Label_carPrice.Content = audi.getPrice();
+            setConfLabels();
         }
 
         // Methode, die aufgerufen wird bei Klick auf "grab it" Button
@@ -190,21 +184,9 @@ namespace GrabTheScreen
             System.Drawing.Image drawingImage = ConvertWpfImageToImage(newImage);
             baseString = GetStringFromImage(drawingImage);
 
-            // Auto Transfer Objekt erzeugen (mit erbender Klasse AutoTO.cs)
-            //AutoTO autoTo = new AutoTO();
-            //autoTo.setModel(auto.getModel());
-            //autoTo.setModelDescription(auto.getModelDescription());
-            //autoTo.setPrice(auto.getPrice());
-            //autoTo.setBaseString64(baseString);
-
-            //JSON-String erzeugen aus Objekt Auto und Base64-String (= autoTo)
-            //var javaScriptSerializer = new JavaScriptSerializer();
-            //string jsonString = javaScriptSerializer.Serialize(autoTo);
-            //Console.WriteLine("Auto-Objekt:" + jsonString);
-
-            // Methodenaufruf, damit JSON-String auf den Server gepusht wird
-           //  postJSONtoServer();
-            MongoDB.mongoDBconnection();
+            btn_grabIt.IsEnabled = false;
+            MongoDB.mongoDBconnection(this.auto);
+            
         }
 
         // erzeugt Tag-Bereich
@@ -213,6 +195,9 @@ namespace GrabTheScreen
             CameraVisualization camera = (CameraVisualization)e.TagVisualization;
             camera.GRABIT.Content = "Auflagefl‰che des Smartphones";
             camera.myRectangle.Fill = SurfaceColors.Accent1Brush;
+
+            this.auto.setStatus(true);
+            MongoDB.mongoDBconnection(this.auto);
         }
 
         // kodiert Image in Base64 String
@@ -244,30 +229,110 @@ namespace GrabTheScreen
             return img;
         }
 
-        // Methode, die den JSON-String via HTTP POST auf den Server pusht 
-        // Methode wird aufgerufen nach Klick auf den "Grab it"-Button
-        public void postJSONtoServer()
+        private void btn_color_black_Click(object sender, RoutedEventArgs e)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://141.19.142.50:28017/gts/pictures/");
-            httpWebRequest.ContentType = "text/json";
-            httpWebRequest.Method = "POST";
+            Random random = new Random();
+            int hash = random.Next(10000, 999999999);
+            this.auto.setId(hash.ToString());
+            auto.setColor("Schwarz");
+            auto.setModelDescription("Modell M Sport");
+            auto.setPrice("43.850 EUR");
+            auto.setSource("Resources/small_bmw_schwarz.jpg");
 
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            {
-                // + "', image: '"+ baseString
-                string json = "{name: '" + audi.getModel() + "', type: '" + audi.getModelDescription() + "', price: '" + audi.getPrice() + "'}";
-                streamWriter.Write(json);
-                streamWriter.Flush();
-                streamWriter.Close();
-            }
+            // Miniaturbild (thumbnail) erzeugen
+            Uri miniatur = new Uri(@"Resources\small_bmw_schwarz.jpg", UriKind.Relative);
+            BitmapImage ib = new BitmapImage(miniatur);
+            System.Windows.Controls.Image thumbnail = new System.Windows.Controls.Image();
+            thumbnail.Source = ib;
+            thumbnail_car.Children.Add(thumbnail);
 
-            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
-            }
+            Uri uri = new Uri(@"Resources\bmw_schwarz.jpg", UriKind.Relative);
+            BitmapImage imageBitmap = new BitmapImage(uri);
+            konfig_auto.Source = imageBitmap;
+
+            setConfLabels();
         }
 
+        private void btn_color_white_Click(object sender, RoutedEventArgs e)
+        {
+            Random random = new Random();
+            int hash = random.Next(10000, 999999999);
+            this.auto.setId(hash.ToString());
+            auto.setColor("Weiﬂ");
+            auto.setModelDescription("Modell Sport Line");
+            auto.setPrice("32.550 EUR");
+            auto.setSource("Resources/small_bmw_weiﬂ.jpg");
 
+            // Miniaturbild (thumbnail) erzeugen
+            Uri miniatur = new Uri(@"Resources\small_bmw_weiﬂ.jpg", UriKind.Relative);
+            BitmapImage ib = new BitmapImage(miniatur);
+            System.Windows.Controls.Image thumbnail = new System.Windows.Controls.Image();
+            thumbnail.Source = ib;
+            thumbnail_car.Children.Add(thumbnail);
+
+            Uri uri = new Uri(@"Resources\bmw_weiﬂ.jpg", UriKind.Relative);
+            BitmapImage imageBitmap = new BitmapImage(uri);
+            konfig_auto.Source = imageBitmap;
+
+            setConfLabels();
+        }
+
+        private void btn_color_blue_Click(object sender, RoutedEventArgs e)
+        {
+            Random random = new Random();
+            int hash = random.Next(10000, 999999999);
+            this.auto.setId(hash.ToString());
+            auto.setColor("Blau");
+            auto.setModelDescription("Modell Urban Line");
+            auto.setPrice("28.950 EUR");
+            auto.setSource("Resources/small_bmw_blau.jpg");
+
+            // Miniaturbild (thumbnail) erzeugen
+            Uri miniatur = new Uri(@"Resources\small_bmw_blau.jpg", UriKind.Relative);
+            BitmapImage ib = new BitmapImage(miniatur);
+            System.Windows.Controls.Image thumbnail = new System.Windows.Controls.Image();
+            thumbnail.Source = ib;
+            thumbnail_car.Children.Add(thumbnail);
+
+            Uri uri = new Uri(@"Resources\bmw_blau.jpg", UriKind.Relative);
+            BitmapImage imageBitmap = new BitmapImage(uri);
+            konfig_auto.Source = imageBitmap;
+
+            setConfLabels();
+        }
+
+        private void btn_color_red_Click(object sender, RoutedEventArgs e)
+        {
+            Random random = new Random();
+            int hash = random.Next(10000, 999999999);
+            this.auto.setId(hash.ToString());
+            auto.setColor("Rot");
+            auto.setModelDescription("Modell Advantage");
+            auto.setPrice("22.650 EUR");
+            auto.setSource("Resources/small_bmw_rot.jpg");
+
+            // Miniaturbild (thumbnail) erzeugen
+            Uri miniatur = new Uri(@"Resources\small_bmw_rot.jpg", UriKind.Relative);
+            BitmapImage ib = new BitmapImage(miniatur);
+            System.Windows.Controls.Image thumbnail = new System.Windows.Controls.Image();
+            thumbnail.Source = ib;
+            thumbnail_car.Children.Add(thumbnail);
+
+            Uri uri = new Uri(@"Resources\bmw_rot.jpg", UriKind.Relative);
+            BitmapImage imageBitmap = new BitmapImage(uri);
+            konfig_auto.Source = imageBitmap;
+
+            setConfLabels();
+        }
+
+        public void setConfLabels()
+        {
+            Label_carModel.Content = auto.getModel();
+            Label_carDescription.Content = auto.getModelDescription();
+            Label_carPrice.Content = auto.getPrice();
+            Label_carColor.Content = auto.getColor();
+
+            btn_grabIt.IsEnabled = true;
+        }
     }
 }

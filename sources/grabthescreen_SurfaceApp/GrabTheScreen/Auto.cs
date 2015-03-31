@@ -19,14 +19,18 @@ namespace GrabTheScreen
         public String price;
         public String source;
         public String id;
+        public String color;
+        public Boolean status;
 
-        public Auto(String car_model, String car_modelDescription, String car_price, String car_source, String car_id)
+        public Auto(String car_model, String car_modelDescription, String car_price, String car_source, String car_id, String car_color, Boolean car_status)
         {
-            model = car_model;
-            modelDescription = car_modelDescription;
-            price = car_price;
-            source = car_source;
-            id = car_id;
+            this.model = car_model;
+            this.modelDescription = car_modelDescription;
+            this.price = car_price;
+            this.source = car_source;
+            this.id = car_id;
+            this.color = car_color;
+            this.status = car_status;
         }
 
         public Auto()
@@ -85,6 +89,23 @@ namespace GrabTheScreen
         public String getId()
         {
             return this.id;
+        }
+
+        public String getColor()
+        {
+            return this.color;
+        }
+
+        public void setColor(String color) { 
+            this.color = color;
+        }
+
+        public Boolean getStatus() {
+            return this.status;
+        }
+
+        public void setStatus(Boolean status) {
+            this.status = status;
         }
     }
 
