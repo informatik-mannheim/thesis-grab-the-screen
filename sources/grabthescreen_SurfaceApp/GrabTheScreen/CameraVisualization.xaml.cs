@@ -22,6 +22,18 @@ namespace GrabTheScreen
     /// </summary>
     public partial class CameraVisualization : TagVisualization
     {
+        Auto auto;
+
+        public Auto getAuto()
+        {
+            return this.auto;
+        }
+
+        public void setAuto(Auto auto)
+        {
+            this.auto = auto;
+        }
+
         public CameraVisualization()
         {
             InitializeComponent();
@@ -30,6 +42,12 @@ namespace GrabTheScreen
         private void CameraVisualization_Loaded(object sender, RoutedEventArgs e)
         {
             //TODO: customize CameraVisualization's UI based on this.VisualizedTag here
+        }
+
+        private void OnLostTag(object sender, RoutedEventArgs e)
+        {
+            this.auto.setStatus(false);
+            MongoDB.mongoDBconnection(this.getAuto());
         }
     }
 }

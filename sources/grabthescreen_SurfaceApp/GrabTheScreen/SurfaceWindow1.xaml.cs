@@ -33,7 +33,14 @@ namespace GrabTheScreen
 
         public Auto auto;
         public String baseString;
-        
+
+        public Auto getAuto() {
+            return this.auto;
+        }
+
+        public void setAuto(Auto auto){
+            this.auto = auto;
+        }
 
         /// <summary>
         /// Default constructor.
@@ -142,11 +149,12 @@ namespace GrabTheScreen
             setConfLabels();
         }
 
+        
         // Methode, die aufgerufen wird bei Klick auf "grab it" Button
         private void btn_grabIt_Click(object sender, RoutedEventArgs e)
         {
             // damit Miniatur-Bild erst zur Laufzeit angezeigt wird
-            placeholder_smartphone.Children.Clear();
+           // placeholder_smartphone.Children.Clear();
 
             // Erstellen des Vizualizer's
             TagVisualizer visualizer = new TagVisualizer();
@@ -161,9 +169,11 @@ namespace GrabTheScreen
             tagDefinition.LostTagTimeout = 2000;
             tagDefinition.MaxCount = 2;
             tagDefinition.OrientationOffsetFromTag = 0;
-            tagDefinition.TagRemovedBehavior = TagRemovedBehavior.Fade;
+            tagDefinition.TagRemovedBehavior = TagRemovedBehavior.Disappear;
             tagDefinition.UsesTagOrientation = true;
-
+            
+            
+           
             // Definitionen dem Visualizer hinzufügen
             visualizer.Definitions.Add(tagDefinition);
             visualizer.VisualizationAdded += OnVisualizationAdded;
@@ -176,14 +186,16 @@ namespace GrabTheScreen
             margin.Right = 20;
             newImage.Margin = margin;
 
-            // zur Laufzeit Bild und Visualizer erzeugen
-            placeholder_smartphone.Children.Add(newImage);
+            // zur Laufzeit Visualizer erzeugen
             placeholder_smartphone.Children.Add(visualizer);
 
+            hierAuflegen.Visibility = System.Windows.Visibility.Visible;
+          
             // WPF-Image zu Drawing-Image konvertieren
             System.Drawing.Image drawingImage = ConvertWpfImageToImage(newImage);
             baseString = GetStringFromImage(drawingImage);
 
+            // setzt status des Datensatzes in DB auf false zunächst
             btn_grabIt.IsEnabled = false;
             MongoDB.mongoDBconnection(this.auto);
             
@@ -192,13 +204,16 @@ namespace GrabTheScreen
         // erzeugt Tag-Bereich
         private void OnVisualizationAdded(object sender, TagVisualizerEventArgs e)
         {
-            CameraVisualization camera = (CameraVisualization)e.TagVisualization;
-            camera.GRABIT.Content = "Auflagefläche des Smartphones";
-            camera.myRectangle.Fill = SurfaceColors.Accent1Brush;
-
             this.auto.setStatus(true);
+            
+            CameraVisualization camera = (CameraVisualization)e.TagVisualization;
+            camera.GRABIT.Content = "Das Smartphone wurde erkannt";
+            camera.myRectangle.Fill = SurfaceColors.Accent1Brush;
+            camera.setAuto(this.getAuto());
+
             MongoDB.mongoDBconnection(this.auto);
         }
+
 
         // kodiert Image in Base64 String
         public static string GetStringFromImage(System.Drawing.Image image)
@@ -331,8 +346,10 @@ namespace GrabTheScreen
             Label_carDescription.Content = auto.getModelDescription();
             Label_carPrice.Content = auto.getPrice();
             Label_carColor.Content = auto.getColor();
+            hierAuflegen.Visibility = System.Windows.Visibility.Hidden;
 
             btn_grabIt.IsEnabled = true;
+
         }
     }
 }
