@@ -15,10 +15,9 @@
         android:background="#FF0000"
         android:textColor="#FFF"
         android:textSize="18dp"
-        android:text="is connected?"
         android:gravity="center"
         android:singleLine="true"
-        android:textAlignment="center" />
+        android:textAlignment="center"/>
 
     <ImageView
         android:id="@+id/ivImageCar"
@@ -28,7 +27,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ihre Konfiguration"
+        android:text="Details"
         android:textColor="#FFF"
         android:background="#000"
         android:paddingLeft="5dp"
@@ -38,33 +37,51 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="5dp">
+        android:padding="15dp">
 
         <TextView
             android:id="@+id/tvCarName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:text="@string/car_name"
-            android:textColor="#000" />
+            android:layout_marginBottom="15dp"
+            android:text="Fahrzeugnane"
+            android:textColor="#000"
+            android:textSize="20dp"/>
 
         <TextView
             android:id="@+id/tvCarType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="15dp"
             android:textColor="#000"
-            android:text="Modell" />
+            android:text="Modell"
+            android:textSize="20dp"/>
 
         <TextView
             android:id="@+id/tvCarPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="15dp"
             android:textColor="#000"
-            android:text="Preis" />
+            android:text="Preis"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/tvCarColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:textColor="#000"
+            android:text="Farbe"
+            android:textSize="20dp"/>
 
     </LinearLayout>
+
+    <ImageView id="@+id/splashscreen" android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"/>
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content" android:text="Hello World, splash"/>
 
 
 
