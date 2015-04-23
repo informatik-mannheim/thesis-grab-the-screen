@@ -62,7 +62,7 @@
                 </Grid.RowDefinitions>
                 <Image Height="auto" Stretch="None" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="auto" Source="Resources\bmw_rot.jpg" Name="konfig_auto" />
 
-                <s:SurfaceButton Content="grab it" Grid.Row="0" Height="40" HorizontalAlignment="Right" Name="btn_grabIt" VerticalAlignment="top" Width="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Click="btn_grabIt_Click" Background="Black" Foreground="#FFF" FontSize="12" Margin="0 100 100 0" />
+                <s:SurfaceButton Content="Fertig? Grab it!" Grid.Row="0" Height="40" HorizontalAlignment="Right" Name="btn_grabIt" VerticalAlignment="top" Width="175" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Click="btn_grabIt_Click" Background="Black" Foreground="#FFF" FontSize="12" Margin="0 100 200 0" />
                 <Grid Grid.Row="1" Margin="0 50 0 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -75,22 +75,22 @@
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Foreground="#000" Margin="12 0 0 15">Außenfarbe</Label>
                         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="15 0 0 0">
-                            <Button Margin="0 0 15 0" Name="btn_color_black" Height="100" Width="100" Click="btn_color_black_Click">
+                            <Button Margin="0 0 15 0" Name="btn_color_black" Height="100" Width="100" TouchDown="btn_color_black_Click">
                                 <Button.Background>
                                     <ImageBrush ImageSource="/GrabTheScreen;component/Resources/btn_black.jpg" />
                                 </Button.Background>
                             </Button>
-                            <Button Margin="0 0 15 0" Name="btn_color_white" Height="100" Width="100" Click="btn_color_white_Click">
+                            <Button Margin="0 0 15 0" Name="btn_color_white" Height="100" Width="100" TouchDown="btn_color_white_Click">
                                 <Button.Background>
                                     <ImageBrush ImageSource="/GrabTheScreen;component/Resources/btn_white.jpg" />
                                 </Button.Background>
                             </Button>
-                            <Button Margin="0 0 15 0" Name="btn_color_blue" Height="100" Width="100" Click="btn_color_blue_Click">
+                            <Button Margin="0 0 15 0" Name="btn_color_blue" Height="100" Width="100" TouchDown="btn_color_blue_Click">
                                 <Button.Background>
                                     <ImageBrush ImageSource="/GrabTheScreen;component/Resources/btn_blue.jpg" />
                                 </Button.Background>
                             </Button>
-                            <Button Margin="0 0 15 0" Name="btn_color_red" Height="100" Width="100" Click="btn_color_red_Click">
+                            <Button Margin="0 0 15 0" Name="btn_color_red" Height="100" Width="100" TouchDown="btn_color_red_Click">
                                 <Button.Background>
                                     <ImageBrush ImageSource="/GrabTheScreen;component/Resources/btn_red.jpg" />
                                 </Button.Background>
@@ -138,7 +138,7 @@
                     <Grid Grid.Row="1" Background="#26282B">
                         <Label Foreground="#FFF" VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="12">Details</Label>
                     </Grid>
-                    <Grid Grid.Row="2" Name="car_information" Width="319" Loaded="Grid_Loaded">
+                    <Grid Grid.Row="2" Name="car_information" Width="200" Loaded="Grid_Loaded">
                         <!-- Auto Informationen -->
                         <Label Name="Label_carModel" FontSize="20" Foreground="DarkSlateGray" Margin="0,5,0,0" />
                         <Label Name="Label_carDescription" FontSize="20" Foreground="DarkSlateGray" Margin="0,45,0,0"/>
@@ -147,7 +147,7 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Border Name="hierAuflegen" Background="Gainsboro" Opacity="0.85" CornerRadius="20 20 20 20" Grid.Column="1" BorderBrush="DarkGray" BorderThickness="3" Height="400" Width="290" Margin="0 0 30 100" Visibility="Hidden">
+            <Border Name="hierAuflegen" Background="Gainsboro" Opacity="0.85" CornerRadius="20 20 20 20" Grid.Column="1" BorderBrush="DarkGray" BorderThickness="3" Height="400" Width="250" Margin="0 0 0 200" Visibility="Hidden">
                 <Grid  Name="placeholder_smartphone" >
                 <Label FontSize="28" VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="Black"> Smartphone hier auflegen</Label>
             </Grid>

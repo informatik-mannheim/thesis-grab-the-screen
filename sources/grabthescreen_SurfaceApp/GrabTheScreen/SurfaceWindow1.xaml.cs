@@ -244,7 +244,7 @@ namespace GrabTheScreen
             return img;
         }
 
-        private void btn_color_black_Click(object sender, RoutedEventArgs e)
+        private void btn_color_black_Click(object sender, TouchEventArgs e)
         {
             Random random = new Random();
             int hash = random.Next(10000, 999999999);
@@ -268,7 +268,7 @@ namespace GrabTheScreen
             setConfLabels();
         }
 
-        private void btn_color_white_Click(object sender, RoutedEventArgs e)
+        private void btn_color_white_Click(object sender, TouchEventArgs e)
         {
             Random random = new Random();
             int hash = random.Next(10000, 999999999);
@@ -292,7 +292,7 @@ namespace GrabTheScreen
             setConfLabels();
         }
 
-        private void btn_color_blue_Click(object sender, RoutedEventArgs e)
+        private void btn_color_blue_Click(object sender, TouchEventArgs e)
         {
             Random random = new Random();
             int hash = random.Next(10000, 999999999);
@@ -316,7 +316,7 @@ namespace GrabTheScreen
             setConfLabels();
         }
 
-        private void btn_color_red_Click(object sender, RoutedEventArgs e)
+        private void btn_color_red_Click(object sender, TouchEventArgs e)
         {
             Random random = new Random();
             int hash = random.Next(10000, 999999999);
