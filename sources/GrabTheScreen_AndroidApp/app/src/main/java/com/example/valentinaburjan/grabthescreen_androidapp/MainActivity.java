@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.estimote.sdk.Beacon;
@@ -125,19 +126,27 @@ public class MainActivity extends Activity implements BeaconManager.RangingListe
     public void onBeaconsDiscovered(Region region, List<Beacon> beacons) {
         Log.d(DEBUG_LABEL, beacons.toString());
 
-        // check if you are connected or not to Server
-        if (isConnected()) {
-            tvIsConnected.setBackgroundColor(0xff00cc00);
-            tvIsConnected.setText("You are connected to Server");
-        } else {
-            tvIsConnected.setText("You are NOT connected to Server");
-        }
-
         for (Beacon beacon : beacons) {
             double distance_to_beacon = Utils.computeAccuracy(beacon);
             if (distance_to_beacon < PROXIMITY_TABLE) {
-                tvIsConnected.setText("You are connected to iBeacon");
-                new HttpAsyncTask().execute(PICTURE_URL);
+                TextView tv = tvIsConnected;
+                tv.setText("Beacon gefunden");
+                LinearLayout.LayoutParams width = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 100);
+                tv.setLayoutParams(width);
+                tv.setBackgroundColor(0xff00ff00);
+
+                // check if you are connected or not to Server
+                if (isConnected()) {
+                        tvIsConnected.setBackgroundColor(0xff00cc00);
+                        tvIsConnected.setText("Beacon gefunden & Server erreicht");
+                        width = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 100);
+                        tvIsConnected.setLayoutParams(width);
+                        tvIsConnected.setWidth(250);
+                        new HttpAsyncTask().execute(PICTURE_URL);
+                } else {
+                    tvIsConnected.setBackgroundColor(0xffff0000);
+                    tvIsConnected.setText("Beacon gefunden & Server nicht erreicht");
+                }
             } else {
                 System.out.println("The MINT beacon is NOT in immediate proximity. Distance: " + distance_to_beacon);
             }
@@ -236,7 +245,7 @@ public class MainActivity extends Activity implements BeaconManager.RangingListe
                 }
 
                 else {
-                    tvIsConnected.setText("Kein Auto konfiguriert!");
+                    tvIsConnected.setText("Auto konfigurieren!");
                 }
 
             } catch (JSONException e) {
