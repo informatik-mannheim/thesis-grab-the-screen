@@ -245,7 +245,7 @@ public class MainActivity extends Activity implements BeaconManager.RangingListe
                 }
 
                 else {
-                    tvIsConnected.setText("Auto konfigurieren!");
+                    System.out.println("Auto erst konfigurieren");
                 }
 
             } catch (JSONException e) {
