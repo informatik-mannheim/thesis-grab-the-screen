@@ -2,13 +2,15 @@
 
 ## German Abstract
 
-Die Nutzung diverser Bildschirmgeräte wächst durch das vielfältige Angebot an mobilen und immobilen Produkten. Zunehmend ist auch das Bedürfnis der Nutzer Geräte parallel zur gleichen Zeit am gleichen Ort zu verwenden. Das Interaktionsparadigma, welches die gleichzeitige Nutzung mehrerer Bildschirmgeräte bezeichnet, nennt man in der Literatur „Blended Interactions “. Bislang sind Blended Interactions jedoch wenig erforscht, weshalb sich diese Arbeit mit der Konzeption und prototypischen Entwicklung einer solchen Interaktion befasst.  
+Die Nutzung diverser Bildschirmgeräte wächst durch das vielfältige Angebot an mobilen und immobilen Produkten. Zunehmend steigt auch das Bedürfnis der Nutzer die Geräte parallel oder sequentiell zur gleichen Zeit am gleichen Ort zu verwenden. Das Paradigma, welches die natürliche Interaktion in Kombination mit mehreren Bildschirmgeräten bezeichnet und die Vermischung der realen Welt mit der digitalen bewirkt, nennt man in der Literatur „Blended Interactions“. Bislang sind Blended Interactions jedoch wenig erforscht, weshalb sich diese Arbeit mit der Konzeption und prototypischen Entwicklung einer solchen Interaktion befasst.
 
-Das in der Thesis behandelte Pattern „grab the screen“ ist ein Interaktionskonzept, das aus einer Sammlung identifizierter Blended Interaction Patterns stammt, die innerhalb einer Studienarbeit erarbeitet wurden.   
+Das in der Thesis behandelte Interaktions-Pattern „grab the screen“ ist ein Konzept, das aus einer Sammlung identifizierter Blended Interaction Patterns stammt, die innerhalb einer Studienarbeit erarbeitet wurden.
 
-Ziel dieser Arbeit ist die Umsetzung von „grab the screen“ als Prototypen, das dem Nutzer die Möglichkeit bietet durch einfaches Auflegen eines Android Smartphones auf einen Microsoft Pixelsense ein Datenobjekt „mitzunehmen“. Im Detail wird ein auf dem Pixelsense konfiguriertes Auto auf das Smartphones übertragen nachdem das Smartphone auf dem Multitouch-Tisch platziert wurde, sodass die Konfiguration auch auf dem Smartphone angezeigt wird. Mit Hilfe von iBeacons erfolgt die Lokalisation des Smartphones; die Datenübertragung findet über das HTTP-Protokoll statt und das zu übertragende Datenobjekt wird in einer Datenbank verwaltet.  
+Ziel dieser Arbeit ist die prototypische Umsetzung von „grab the screen“. Der Prototyp umfasst die Interaktion des Auflegens und Wiederwegnehmens eines physikalischen Gegenstandes. Speziell wird ein Android Smartphone auf einen Multi-Touch-Tisch von Microsoft (Pixelsense) aufgelegt und anschließend wieder weggenommen.
 
-Die Abschlussarbeit wird im Rahmen des Forschungsprojektes SysPlace  als eine Sammlung für Interessenten zusammengestellt und publiziert. Basierend auf den Ergebnissen der Thesis wird die „grab the screen“-Interaktionsbeschreibung überarbeitet und dem Projekt zur Verfügung gestellt.
+Im Detail wird ein auf dem Pixelsense konfiguriertes Auto-Objekt an das Smartphone übermittelt nachdem das Smartphone auf dem Multi-Touch-Tisch platziert wurde. Mit Hilfe der Funktechnologie von Beacons kann die Distanz zwischen dem Smartphone und dem Pixelsense bestimmt werden. Die Datenkommunikation binnen der Anwendungen auf den Geräten findet über einen Server statt.
+Die Ergebnisse dieser Abschlussarbeit fließen in das Forschungsprojekt SysPlace als Teil eines Blended Interaction Kataloges ein. Der Katalog dient als Leitfaden für Interessenten zur Interaktionsumsetzung.
+Basierend auf den Ergebnissen der Thesis wird die „grab the screen“- Interaktionsbeschreibung dem Projekt zur Publizierung bereitgestellt.
 
 ## English Abstract 
 
